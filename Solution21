@@ -1,0 +1,43 @@
+package com.qingh;
+
+/**
+ * @author create by yangxb
+ * @date 2021/9/8
+ */
+public class Solution21 {
+
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode();
+        ListNode forward = dummy;
+        while (l1 != null && l2 != null) {
+            if (l1.val > l2.val) {
+                forward.next = l2;
+                l2 = l2.next;
+            } else {
+                forward.next = l1;
+                l1 = l1.next;
+            }
+            forward = forward.next;
+        }
+        if (l1 == null) forward.next = l2;
+        else forward.next = l1;
+        return dummy.next;
+    }
+}
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode() {
+    }
+
+    ListNode(int val) {
+        this.val = val;
+    }
+
+    ListNode(int val, ListNode next) {
+        this.val = val;
+        this.next = next;
+    }
+}
