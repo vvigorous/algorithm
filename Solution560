@@ -1,0 +1,28 @@
+package com.qingh;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * @author create by yangxb
+ * @date 2021/9/8
+ */
+public class Solution560 {
+    private Map<Integer,Integer> count = new HashMap<>();
+    public int subarraySum(int[] nums, int k) {
+        // 前缀和
+        int n = nums.length;
+        int[] sums = new int[n+1];
+        for(int i = 1; i <= n ;i++) sums[i] = sums[i-1] + nums[i-1];
+        int ans = 0;
+        for(int i = 0 ; i <=n ;i++){
+            // for(int j = 0; j < i;j ++){
+            //     if(sums[i] - sums[j] == k) ans++;
+            // }
+            // if(sums[i] - k >=0)
+            ans+= count.getOrDefault(sums[i] - k,0);
+            count.put(sums[i],count.getOrDefault(sums[i],0)+1);
+        }
+        return ans;
+    }
+}
